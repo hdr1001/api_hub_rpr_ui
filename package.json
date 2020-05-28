@@ -1,7 +1,7 @@
 {
-  "name": "min_react_app",
+  "name": "api_hub_rpr_ui",
   "version": "1.0.0",
-  "description": "Minimal React application boilerplate",
+  "description": "User interface for API Hub (v3)",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
@@ -9,20 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hdr1001/min_react_app.git"
+    "url": "git+https://github.com/hdr1001/api_hub_rpr_ui.git"
   },
   "keywords": [
-    "React",
-    "app",
-    "application",
-    "boilerplate"
+    "UI",
+    "API",
+    "Hub",
+    "D&B",
+    "Direct+",
+    "IDR"
   ],
   "author": "Hans de Rooij",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/hdr1001/min_react_app/issues"
+    "url": "https://github.com/hdr1001/api_hub_rpr_ui/issues"
   },
-  "homepage": "https://github.com/hdr1001/min_react_app#readme",
+  "homepage": "https://github.com/hdr1001/api_hub_rpr_ui#readme",
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -37,6 +39,6 @@
     "style-loader": "^1.1.4",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   }
 }
