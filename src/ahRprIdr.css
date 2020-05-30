@@ -1,0 +1,40 @@
+body {
+  font-family: "Open Sans", Verdana, Tahoma, Arial, sans-serif;
+  color: #303030;
+}
+
+form {
+  margin: 20px 0 24px 0;
+}
+
+form fieldset {
+  width: 360px;
+  padding: 10px;
+  margin: 10px auto;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cccccc;
+}
+
+form fieldset legend {
+  padding: 2px 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cccccc;
+  background-color: #f4f4f4;
+}
+
+input[type="text"] {
+  width: 330px;
+  margin: 4px auto;
+  display: block;
+}
+
+div.btns {
+  width: 200px;
+  margin: 10px auto 0;
+}
+
+input[type="submit"], input[type="reset"] {
+  margin: 4px 4px 4px 0;
+}

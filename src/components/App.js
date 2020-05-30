@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
+//API Hub Request, Persist & Respond UI
+//Main App component for D&B D+ IDentity Resolution
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                <p>User interface for API Hub request, persist &amp; respond (v3)</p>
-            </div>
-        );
-    }
+import React from 'react';
+import { AhRprIdrForm } from './AhRprIdrForm';
+
+let jsonIniState =
+   "{" +
+      '"idrCriteria": {' +
+         '"name": "",' +
+         '"streetAddressLine1": "",' +
+         '"addressLocality": "",' +
+         '"countryISOAlpha2Code": "NL"' +
+   "}}";
+
+function App(props) {
+   return (
+      <AhRprIdrForm iniState={jsonIniState} />
+   );
 }
 
 export default App;
