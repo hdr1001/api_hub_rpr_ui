@@ -18,6 +18,7 @@ function AhRprIdrCriteriaForm(props) {
                placeholder="Name"
                value={props.state.name}
                onChange={props.handleCriteriaChange}
+               ref={props.focusInp}
             />
 
             <input

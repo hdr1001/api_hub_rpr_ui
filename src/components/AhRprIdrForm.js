@@ -42,6 +42,9 @@ class AhRprIdrForm extends Component {
    handleCriteriaReset(event) {
       this.setState(JSON.parse(this.props.iniState));
 
+      //Set the focus to the designated input element
+      this.criteriaFormFocusInp.focus();
+
       event.preventDefault();
    }
 
@@ -52,6 +55,7 @@ class AhRprIdrForm extends Component {
             handleCriteriaChange={this.handleCriteriaChange}
             handleCriteriaSubmit={this.handleCriteriaSubmit}
             handleCriteriaReset={this.handleCriteriaReset}
+            focusInp={inp => this.criteriaFormFocusInp = inp}
          />
       );
    }
