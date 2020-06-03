@@ -38,3 +38,9 @@ div.btns {
 input[type="submit"], input[type="reset"] {
   margin: 4px 4px 4px 0;
 }
+
+div.notification {
+  width: 175px;
+  margin: auto;
+  font-size: smaller;
+}

@@ -2,14 +2,22 @@
 //D&B D+ IDentity Resolution form logic
 
 import React, { Component } from 'react';
-import { AhRprIdrCriteriaForm } from './AhRprIdrCriteriaForm'
+import { appStatus } from  './AhRprIdrGlobals';
+import { AhRprIdrCriteriaForm } from './AhRprIdrCriteriaForm';
 
 class AhRprIdrForm extends Component {
    constructor(props) {
       super(props);
 
-      this.state = JSON.parse(props.iniState);
+      //Parse JSON passed in containing the initial search criteria
+      this._iniIdrCriteria = JSON.parse(props.iniIdrCriteria);
 
+      //Initialize the initial search criteria
+      this.state = {
+         idrCriteria: {...this._iniIdrCriteria},
+         appStatus: appStatus.criteriaSpec
+      };
+ 
       //Handle events originating from the criteria form
       this.handleCriteriaChange = this.handleCriteriaChange.bind(this);
       this.handleCriteriaSubmit = this.handleCriteriaSubmit.bind(this);
@@ -23,11 +31,17 @@ class AhRprIdrForm extends Component {
          idrCriteria: {
             ...prevState.idrCriteria,
             [event.target.name]: event.target.value
-         }
+         },
+         appStatus: prevState.appStatus
       }));
    }
 
    handleCriteriaSubmit(event) {
+      this.setState(prevState => ({
+         idrCriteria: {...prevState.idrCriteria},
+         appStatus: appStatus.wait
+      }));
+
       let sAlert = "", obj = this.state.idrCriteria;
 
       Object.keys(obj).forEach(key => {
@@ -40,7 +54,10 @@ class AhRprIdrForm extends Component {
    }
 
    handleCriteriaReset(event) {
-      this.setState(JSON.parse(this.props.iniState));
+      this.setState(prevState => ({
+         idrCriteria: {...this._iniIdrCriteria},
+         appStatus: prevState.appStatus
+      }));
 
       //Set the focus to the designated input element
       this.criteriaFormFocusInp.focus();
@@ -51,7 +68,7 @@ class AhRprIdrForm extends Component {
    render() {
       return (
          <AhRprIdrCriteriaForm
-            state={this.state.idrCriteria}
+            state={this.state}
             handleCriteriaChange={this.handleCriteriaChange}
             handleCriteriaSubmit={this.handleCriteriaSubmit}
             handleCriteriaReset={this.handleCriteriaReset}

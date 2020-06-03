@@ -2,6 +2,7 @@
 //D&B D+ IDentity Resolution search criteria form
 
 import React from 'react';
+import { appStatus } from  './AhRprIdrGlobals';
 import idrStyles from '../ahRprIdr.css';
 
 function AhRprIdrCriteriaForm(props) {
@@ -16,7 +17,7 @@ function AhRprIdrCriteriaForm(props) {
                type="text"
                name="name"
                placeholder="Name"
-               value={props.state.name}
+               value={props.state.idrCriteria.name}
                onChange={props.handleCriteriaChange}
                ref={props.focusInp}
             />
@@ -25,7 +26,7 @@ function AhRprIdrCriteriaForm(props) {
                type="text"
                name="streetAddressLine1"
                placeholder="Address"
-               value={props.state.streetAddressLine1}
+               value={props.state.idrCriteria.streetAddressLine1}
                onChange={props.handleCriteriaChange}
             />
 
@@ -33,14 +34,23 @@ function AhRprIdrCriteriaForm(props) {
               type="text"
               name="addressLocality"
               placeholder="City"
-              value={props.state.addressLocality}
+              value={props.state.idrCriteria.addressLocality}
               onChange={props.handleCriteriaChange}
             />
 
-            <div class="btns">
-               <input type="submit" value="Submit" />
-               <input type="reset" value="Reset" />
-            </div>
+            { props.state.appStatus === appStatus.criteriaSpec
+               ?  <div class="btns">
+                     <input type="submit" value="Submit" />
+                     <input type="reset" value="Reset" />
+                  </div> 
+                  
+               :  props.state.appStatus === appStatus.wait
+                     ?  <div class="notification">
+                           <p>Processing, please wait ...</p>
+                        </div> 
+
+                     :  null
+            }
          </fieldset>
 
       </form>

@@ -4,18 +4,17 @@
 import React from 'react';
 import { AhRprIdrForm } from './AhRprIdrForm';
 
-let jsonIniState =
+let sIniIdrCriteria =
    "{" +
-      '"idrCriteria": {' +
-         '"name": "",' +
-         '"streetAddressLine1": "",' +
-         '"addressLocality": "",' +
-         '"countryISOAlpha2Code": "NL"' +
-   "}}";
+      '"name": "",' +
+      '"streetAddressLine1": "",' +
+      '"addressLocality": "",' +
+      '"countryISOAlpha2Code": "NL"' +
+   "}";
 
 function App(props) {
    return (
-      <AhRprIdrForm iniState={jsonIniState} />
+      <AhRprIdrForm iniIdrCriteria={sIniIdrCriteria} />
    );
 }
 
