@@ -4,7 +4,8 @@
 //Application status
 const appStatus = {
    criteriaSpec: 0,
-   wait: 1
+   wait: 1,
+   selectMC: 2
 };
 
 export {
