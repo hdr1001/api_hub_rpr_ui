@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { appStatus } from  './AhRprIdrGlobals';
-import idrStyles from '../ahRprIdr.css';
 
 function AhRprIdrCriteriaForm(props) {
    return (
