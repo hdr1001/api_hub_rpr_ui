@@ -38,13 +38,13 @@ function AhRprIdrCriteriaForm(props) {
             />
 
             { props.state.appStatus === appStatus.criteriaSpec
-               ?  <div class="btns">
+               ?  <div className="btns">
                      <input type="submit" value="Submit" />
                      <input type="reset" value="Reset" />
                   </div> 
                   
                :  props.state.appStatus === appStatus.wait
-                     ?  <div class="notification">
+                     ?  <div className="notification">
                            <p>Processing, please wait ...</p>
                         </div> 
 

@@ -8,6 +8,11 @@ const appStatus = {
    selectMC: 2
 };
 
+const reqMaxQtyMCs = 10;
+const maxMCsPerPage = 5;
+
 export {
-   appStatus //Application status & current status
+   appStatus,    //Application status & current status
+   reqMaxQtyMCs, //The maximum number of match candidates returned by the D+ API
+   maxMCsPerPage //The maximum number of match candidates displayed per page
 }

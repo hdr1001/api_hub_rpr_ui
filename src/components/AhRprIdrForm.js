@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import { appStatus } from  './AhRprIdrGlobals';
+import { fetchApiHubIdrMCs } from  './AhRprIdrFetch';
 import { AhRprIdrCriteriaForm } from './AhRprIdrCriteriaForm';
 import { AhRprIdrMCsForm } from './AhRprIdrMCsForm';
 
@@ -18,13 +19,14 @@ class AhRprIdrForm extends Component {
          idrCriteria: {...this._iniIdrCriteria},
          appStatus: appStatus.criteriaSpec
       };
- 
+
       //Handle events originating from the criteria form
       this.handleCriteriaChange = this.handleCriteriaChange.bind(this);
       this.handleCriteriaSubmit = this.handleCriteriaSubmit.bind(this);
       this.handleCriteriaReset = this.handleCriteriaReset.bind(this);
 
       //Handle events originating from the match candidates form
+      this.handleMCsChange = this.handleMCsChange.bind(this);
       this.handleMCsSubmit = this.handleMCsSubmit.bind(this);
       this.handleMCsReset = this.handleMCsReset.bind(this);
    }
@@ -44,31 +46,24 @@ class AhRprIdrForm extends Component {
       }));
    }
 
+   handleMCsChange(event) {
+      const { name, value } = event.target;
+
+      //Set value of state property optMC
+      this.setState({ [name]: value});   
+   }
+
    handleCriteriaSubmit(event) {
-      this.setState(prevState => ({
-         appStatus: appStatus.wait
-      }));
+      this.setState({appStatus: appStatus.wait});
 
-      setTimeout(() => {
-         this.setState(prevState => ({
-            appStatus: appStatus.selectMC
-         }));
-      }, 3000);
-/*      let sAlert = "", obj = this.state.idrCriteria;
-
-      Object.keys(obj).forEach(key => {
-         sAlert +=  key + " = " + obj[key] + ", ";
-      });
-
-      alert(sAlert.substr(0, sAlert.length - 2)); */
+      //Application status will be updated in fetchApiHubIdrMCs!
+      fetchApiHubIdrMCs.call(this);
 
       event.preventDefault();
    }
 
    handleCriteriaReset(event) {
-      this.setState(prevState => ({
-         idrCriteria: {...this._iniIdrCriteria}
-      }));
+      this.setState({idrCriteria: {...this._iniIdrCriteria}});
 
       //Set the focus to the designated input element
       this.criteriaFormFocusInp.focus();
@@ -77,16 +72,33 @@ class AhRprIdrForm extends Component {
    }
 
    handleMCsSubmit(event) {
-      this.setState(prevState => ({
+      if(this.state.optMC) {
+         console.log('DUNS ' + this.state.optMC + ' selected');
+      }
+      else {
+         console.log('🤔, on submit expression this.state.optMC evaluates to false!');
+      }
+
+      this.setState({
          idrCriteria: {...this._iniIdrCriteria},
+         idrMCs: null,
+         optMC: null,
          appStatus: appStatus.criteriaSpec
-      }));
+      });
+
+      //Set the focus to the designated input element
+      this.criteriaFormFocusInp.focus();
    }
 
    handleMCsReset(event) {
-      this.setState(prevState => ({
+      this.setState({
+         idrMCs: null,
+         optMC: null,
          appStatus: appStatus.criteriaSpec
-      }));
+      });
+
+      //Set the focus to the designated input element
+      this.criteriaFormFocusInp.focus();
    }
 
    render() {
@@ -102,8 +114,11 @@ class AhRprIdrForm extends Component {
 
             { (this.state.appStatus === appStatus.selectMC)
                ?  <AhRprIdrMCsForm
+                     state={this.state} 
+                     handleMCsChange={this.handleMCsChange}
                      handleMCsSubmit={this.handleMCsSubmit}
                      handleMCsReset={this.handleMCsReset}
+                     focusOpt={inp => this.mcsFormFocusOpt = inp}
                   />
                :  null
             }
