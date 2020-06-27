@@ -5,7 +5,8 @@
 const appStatus = {
    criteriaSpec: 0,
    wait: 1,
-   selectMC: 2
+   selectMC: 2,
+   error: 3
 };
 
 const reqMaxQtyMCs = 10;

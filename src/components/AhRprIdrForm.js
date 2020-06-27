@@ -17,11 +17,12 @@ class AhRprIdrForm extends Component {
       //Initialize the initial search criteria
       this.state = {
          idrCriteria: {...this._iniIdrCriteria},
-         appStatus: appStatus.criteriaSpec
+         appStatus: appStatus.criteriaSpec,
       };
 
       //Handle events originating from the criteria form
       this.handleCriteriaChange = this.handleCriteriaChange.bind(this);
+      this.handleCriteriaAlertClose = this.handleCriteriaAlertClose.bind(this);
       this.handleCriteriaSubmit = this.handleCriteriaSubmit.bind(this);
       this.handleCriteriaReset = this.handleCriteriaReset.bind(this);
 
@@ -51,6 +52,18 @@ class AhRprIdrForm extends Component {
 
       //Set value of state property optMC
       this.setState({ [name]: value});   
+   }
+
+   handleCriteriaAlertClose(event) {
+      this.setState(
+         {
+            appStatus: appStatus.criteriaSpec,
+            idrErrMsg: ''
+         }
+      );
+
+      //Set the focus to the designated input element
+      this.criteriaFormFocusInp.focus();
    }
 
    handleCriteriaSubmit(event) {
@@ -107,6 +120,7 @@ class AhRprIdrForm extends Component {
             <AhRprIdrCriteriaForm
                state={this.state}
                handleCriteriaChange={this.handleCriteriaChange}
+               handleCriteriaAlertClose={this.handleCriteriaAlertClose}
                handleCriteriaSubmit={this.handleCriteriaSubmit}
                handleCriteriaReset={this.handleCriteriaReset}
                focusInp={inp => this.criteriaFormFocusInp = inp}

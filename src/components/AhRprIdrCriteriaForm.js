@@ -2,7 +2,9 @@
 //D&B D+ IDentity Resolution search criteria form
 
 import React from 'react';
-import { appStatus } from  './AhRprIdrGlobals';
+import { appStatus } from './AhRprIdrGlobals';
+import { AhRprIdrNotif } from './ahRprIdrNotif';
+import { AhRprIdrErrAlert } from './ahRprIdrErrAlert';
 
 function AhRprIdrCriteriaForm(props) {
    return (
@@ -44,11 +46,17 @@ function AhRprIdrCriteriaForm(props) {
                   </div> 
                   
                :  props.state.appStatus === appStatus.wait
-                     ?  <div className="notification">
-                           <p>Processing, please wait ...</p>
-                        </div> 
+                     ?  <AhRprIdrNotif
+                           notifMsg='Processing, please wait ...'
+                        />
 
-                     :  null
+                     :  props.state.appStatus === appStatus.error
+                           ?  <AhRprIdrErrAlert
+                                 handleCriteriaAlertClose={props.handleCriteriaAlertClose}
+                                 state={props.state}
+                              />
+
+                           : null
             }
          </fieldset>
 
