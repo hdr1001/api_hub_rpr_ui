@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import { appStatus } from  './AhRprIdrGlobals';
-import { fetchApiHubIdrMCs } from  './AhRprIdrFetch';
+import { fetchApiHubIdrMCs, updApiHubIdrDUNS } from  './AhRprIdrFetch';
 import { AhRprIdrCriteriaForm } from './AhRprIdrCriteriaForm';
 import { AhRprIdrMCsForm } from './AhRprIdrMCsForm';
 
@@ -86,7 +86,10 @@ class AhRprIdrForm extends Component {
 
    handleMCsSubmit(event) {
       if(this.state.optMC) {
-         console.log('DUNS ' + this.state.optMC + ' selected');
+         console.log('DUNS ' + this.state.optMC +
+                        ' selected for IDR ID ' + this.state.idrID);
+
+         updApiHubIdrDUNS(this.state.idrID, this.state.optMC);
       }
       else {
          console.log('🤔, on submit expression this.state.optMC evaluates to false!');
@@ -95,6 +98,7 @@ class AhRprIdrForm extends Component {
       this.setState({
          idrCriteria: {...this._iniIdrCriteria},
          idrMCs: null,
+         idrID: null,
          optMC: null,
          appStatus: appStatus.criteriaSpec
       });
@@ -106,6 +110,7 @@ class AhRprIdrForm extends Component {
    handleMCsReset(event) {
       this.setState({
          idrMCs: null,
+         idrID: null,
          optMC: null,
          appStatus: appStatus.criteriaSpec
       });
