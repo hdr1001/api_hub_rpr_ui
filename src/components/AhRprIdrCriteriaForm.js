@@ -3,8 +3,11 @@
 
 import React from 'react';
 import { appStatus } from './AhRprIdrGlobals';
+import { CountryAutosuggest } from './CountryAutosuggest';
 import { AhRprIdrNotif } from './ahRprIdrNotif';
 import { AhRprIdrErrAlert } from './ahRprIdrErrAlert';
+
+const handleFocus = evnt => evnt.target.select();
 
 function AhRprIdrCriteriaForm(props) {
    return (
@@ -14,6 +17,12 @@ function AhRprIdrCriteriaForm(props) {
       >
          <fieldset>
             <legend>Search criteria</legend>
+            <CountryAutosuggest
+               state={props.state}
+               handleCriteriaChange={props.handleCriteriaChange}
+               onFocus={handleFocus}
+            />
+
             <input
                type="text"
                name="name"
@@ -21,6 +30,7 @@ function AhRprIdrCriteriaForm(props) {
                value={props.state.idrCriteria.name}
                onChange={props.handleCriteriaChange}
                ref={props.focusInp}
+               onFocus={handleFocus}
             />
 
             <input
@@ -29,6 +39,7 @@ function AhRprIdrCriteriaForm(props) {
                placeholder="Address"
                value={props.state.idrCriteria.streetAddressLine1}
                onChange={props.handleCriteriaChange}
+               onFocus={handleFocus}
             />
 
             <input
@@ -37,6 +48,7 @@ function AhRprIdrCriteriaForm(props) {
               placeholder="City"
               value={props.state.idrCriteria.addressLocality}
               onChange={props.handleCriteriaChange}
+              onFocus={handleFocus}
             />
 
             { props.state.appStatus === appStatus.criteriaSpec
